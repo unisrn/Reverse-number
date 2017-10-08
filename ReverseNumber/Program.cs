@@ -12,28 +12,32 @@ namespace ReverseNumber
         {
             string strNumber = "";
 
-            do
+            while (true)
             {
-                Console.Write("Enter a number (1000 - 9999): ");
-                strNumber = Console.ReadLine();
+                do
+                {
+                    Console.Write("Enter a number (1000 - 9999): ");
+                    strNumber = Console.ReadLine();
+
+                    if (strNumber == "0")
+                        break;
+
+                } while (!validation(strNumber));
 
                 if (strNumber == "0")
-                {
                     break;
-                }
-            } while (!validation(strNumber));
-            
 
-            int strConvertToNumber = Convert.ToInt32(ReverseNumber(strNumber));
-            if (Convert.ToInt32(strNumber) > strConvertToNumber)
-            {
-                int result = Convert.ToInt32(strNumber) - strConvertToNumber;
-                Console.WriteLine(strNumber + " - " + strConvertToNumber + " = " + result);
-            }
-            else
-            {
-                int result = strConvertToNumber - Convert.ToInt32(strNumber);
-                Console.WriteLine(strConvertToNumber + " - " + strNumber + " = " + result);
+                int strConvertToNumber = Convert.ToInt32(ReverseNumber(strNumber));
+                if (Convert.ToInt32(strNumber) > strConvertToNumber)
+                {
+                    int result = Convert.ToInt32(strNumber) - strConvertToNumber;
+                    Console.WriteLine(strNumber + " - " + strConvertToNumber + " = " + result);
+                }
+                else
+                {
+                    int result = strConvertToNumber - Convert.ToInt32(strNumber);
+                    Console.WriteLine(strConvertToNumber + " - " + strNumber + " = " + result);
+                }
             }
 
             Console.ReadKey();
@@ -57,6 +61,22 @@ namespace ReverseNumber
                 Console.WriteLine("Please enter number between 1000 - 9999");
                 return false;
             }
+            if (strNumber.Length < 4 || strNumber.Length > 4)
+            {
+                Console.WriteLine("Please enter number 4 digits only");
+                return false;
+            }
+            try
+            {
+                int tryToConvertstrNumber = Convert.ToInt32(strNumber);
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Please enter number only");
+                return false;
+            }
+
             return true;
         }
     }
